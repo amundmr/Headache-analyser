@@ -3,7 +3,6 @@
 This small software aims to make the analyzation of headaches eazy. It is based on having a separate calendar with only headache events, where you manually create a new event and fill in the details of the template when a headache occur. This calendar can then be exported from any calendar client and to a `.ics` file, which this program can work with.
 
 
-
 Google calendar headache entry template: 
 ```
 Start: 0900
@@ -18,6 +17,16 @@ Sleep deprivation: 0
 Maxalt: no 
 Maxalt fixed it:
 ```
+
+# Dependencies
+Python 3 or newer.
+
+Python packages: 
+
+- matplotlib
+- ics
+
+Both can be installed by `pip install <package>`
 
 
 # Commands
