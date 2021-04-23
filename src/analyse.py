@@ -1,18 +1,16 @@
-from ics import Calendar, Event
+from ics import Calendar, Event  # pip install ics
+import utils
+
 filename = "./data/20210420.ics"
-f = open(filename, "r")
-data = f.readlines()
-string = ""
-for line in data:
-    string += line
-c = Calendar(string)
-#print(type(c.events))
-set_of_events = c.events
-i=0
-for event in set_of_events:
-    if i<2:
-        print(event)
-    i+=1
+event_lst = utils.read_ics(filename)
+
+
+#utils.get_averages(event_lst)
+#utils.get_logstats(event_lst)
+
+#utils.plot_weekday(event_lst)
+#utils.plot_by_strength(event_lst)
+utils.get_max_strength_of(event_lst[-1])
 
 class Headache:
     def __init__(self, 
