@@ -65,11 +65,13 @@ First logging: 7 months ago, last logging: 3 days ago
 Takes list of events, outputs bar plot with number of occurences vs weekday.
 
 Example:
-()[./assets/weekday_plot.png]
+
+![](./assets/weekday_plot.png)
 
 
 ## plot_by_strength(events)
 Takes list of events, outputs bar plot with number of occurences vs max strength of headache.
 
 Example:
-()[./assets/strength_plot.png]
+
+![](./assets/strength_plot.png)
