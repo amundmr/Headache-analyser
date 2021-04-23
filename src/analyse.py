@@ -5,12 +5,12 @@ filename = "./data/20210420.ics"
 event_lst = utils.read_ics(filename)
 
 
-#utils.get_averages(event_lst)
-#utils.get_logstats(event_lst)
+utils.get_averages(event_lst)
+utils.get_logstats(event_lst)
 
-#utils.plot_weekday(event_lst)
-#utils.plot_by_strength(event_lst)
-utils.get_max_strength_of(event_lst[-1])
+utils.plot_weekday(event_lst)
+utils.plot_by_strength(event_lst)
+
 
 class Headache:
     def __init__(self, 

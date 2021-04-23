@@ -64,9 +64,11 @@ def plot_by_strength(events):
     strength_strings = [r"$\frac{1}{10}$", r"$\frac{2}{10}$", r"$\frac{3}{10}$", r"$\frac{4}{10}$", r"$\frac{5}{10}$", r"$\frac{6}{10}$", r"$\frac{7}{10}$", r"$\frac{8}{10}$", r"$\frac{9}{10}$", r"$\frac{10}{10}$", ]
 
     for event in events:
-        desc = event.description
-        # Find "Times:" and max strength of any time, and return.
-        #strengths[max_strength] += 1
+        try:
+            max_strength = get_max_strength_of(event)
+            strengths[max_strength] += 1
+        except:
+            continue
     
     plt.bar(strength_strings, strengths)
     plt.ylabel("Total occurences")
@@ -78,14 +80,16 @@ def get_max_strength_of(event):
     strengths = []
     in_times = False
     for line in data.split("\n"):
-        print(line)
         if "Times:" in line:
             in_times = True
-            print("found times")
+            continue
         elif "Coffe:" in line:
-            print("found cooffe, breaking")
             break
         
         if in_times == True:
-            strengths.append(eval(line.split(":")[-1]))
-    print(strengths)
+            strengths.append(int(eval(line.split(":")[-1])*10))
+    try: 
+        maks = max(strengths)
+    except:
+        maks = None
+    return maks
