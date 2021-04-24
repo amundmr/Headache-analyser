@@ -14,7 +14,6 @@ def read_ics(filename):
 def get_averages(events):
     n_headaches = len(events)
 
-    print(n_headaches)
     start_date = events[0].begin
     end_date = events[-1].begin
 
