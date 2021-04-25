@@ -1,15 +1,17 @@
 from ics import Calendar, Event  # pip install ics
-import utils
+from utils import *
+from prints import *
+from plots import *
 
 filename = "./data/20210420.ics"
-event_lst = utils.read_ics(filename)
+event_lst = read_ics(filename)
 
 
-utils.get_averages(event_lst)
-utils.get_logstats(event_lst)
+print_averages(event_lst)
+print_logstats(event_lst)
 
-utils.plot_weekday(event_lst)
-utils.plot_by_strength(event_lst)
+plot_weekday(event_lst)
+plot_by_strength(event_lst)
 
 
 class Headache:
