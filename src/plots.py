@@ -15,8 +15,6 @@ def plot_weekday(events):
     print(avg_strengths)
     import matplotlib.pyplot as plt
     import matplotlib as mpl
-    #TODO: Add colors to bars dependent on average headache strength
-
     
     cmap = mpl.cm.hsv
     norm = mpl.colors.Normalize(vmin=0, vmax=10)
