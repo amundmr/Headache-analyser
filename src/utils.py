@@ -12,11 +12,16 @@ def read_ics(filename):
     return e
 
 def get_max_strength_of(event):
+    from fractions import Fraction
+    import re
     data = event.description
 
     strengths = []
     in_times = False
-    for line in data.split("\n"):
+    
+    data_lst = re.split('\n|<br>',data)
+
+    for line in data_lst:
         if "Times:" in line:
             in_times = True
             continue
@@ -24,9 +29,16 @@ def get_max_strength_of(event):
             break
         
         if in_times == True:
-            strengths.append(int(eval(line.split(":")[-1])*10))
+            try:
+                s = int(float(Fraction(line.split(":")[-1]))*10)
+                strengths.append(s)
+            except:
+                continue
+
+        continue
     try: 
         maks = max(strengths)
     except:
         maks = None
+
     return maks

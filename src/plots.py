@@ -1,13 +1,32 @@
 
 def plot_weekday(events):
+    from utils import get_max_strength_of
     weekdays = [0,0,0,0,0,0,0]
+    avg_strengths = [0,0,0,0,0,0,0]
+    strengths= [[],[],[],[],[],[],[]]
     weekday_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     for event in events:
         weekdays[event.begin.weekday()] += 1
-    
+        strengths[event.begin.weekday()].append(get_max_strength_of(event))
+
+    for i,s in enumerate(strengths):
+        s = list(filter(None, s))
+        avg_strengths[i] = sum(s)/len(s)
+    print(avg_strengths)
     import matplotlib.pyplot as plt
+    import matplotlib as mpl
     #TODO: Add colors to bars dependent on average headache strength
-    plt.bar(weekday_names,weekdays)
+
+    
+    cmap = mpl.cm.hsv
+    norm = mpl.colors.Normalize(vmin=0, vmax=10)
+    colors = []
+    for i in avg_strengths:
+        colors.append(cmap(norm(i)))
+
+    plt.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
+              orientation='vertical', label='Headache strength')
+    plt.bar(weekday_names,weekdays, color = colors)
     plt.ylabel("Total occurences")
     plt.show()
 
