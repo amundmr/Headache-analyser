@@ -12,20 +12,29 @@ def plot_weekday(events):
     for i,s in enumerate(strengths):
         s = list(filter(None, s))
         avg_strengths[i] = sum(s)/len(s)
-    print(avg_strengths)
-    import matplotlib.pyplot as plt
-    import matplotlib as mpl
-    
-    cmap = mpl.cm.hsv
-    norm = mpl.colors.Normalize(vmin=0, vmax=10)
-    colors = []
-    for i in avg_strengths:
-        colors.append(cmap(norm(i)))
 
-    plt.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
-              orientation='vertical', label='Headache strength')
-    plt.bar(weekday_names,weekdays, color = colors)
-    plt.ylabel("Total occurences")
+    colors = []
+    data_color = [x / 10 for x in avg_strengths]
+
+    import matplotlib.pyplot as plt
+    from matplotlib.cm import ScalarMappable
+
+    fig, ax = plt.subplots(figsize=(10, 7))
+
+    my_cmap = plt.cm.get_cmap('tab10')
+    colors = my_cmap(data_color)
+    rects = ax.bar([1, 2, 3, 4, 5, 6, 7], weekdays, color=colors, tick_label = weekday_names)
+
+
+    sm = ScalarMappable(cmap=my_cmap, norm=plt.Normalize(0,10))
+    sm.set_array([])
+
+    cbar = plt.colorbar(sm)
+    cbar.set_label('Average Strength', rotation=270,labelpad=25)
+
+  
+    plt.ylabel("Occurences")
+    plt.title("Headache weekday distribution")
     plt.show()
 
 def plot_by_strength(events):
@@ -42,6 +51,8 @@ def plot_by_strength(events):
         except:
             continue
     
-    plt.bar(strength_strings, strengths)
+    plt.bar([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], strengths, tick_label=strength_strings)
     plt.ylabel("Total occurences")
+    plt.xlabel("Headache Strength")
+    plt.title("Occurences of Headache Strengths")
     plt.show()
